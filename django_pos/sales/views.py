@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django_pos.wsgi import *
@@ -47,28 +48,35 @@ def SalesAddView(request):
                 "amount_change": float(data["amount_change"]),
             }
             try:
-                # Create the sale
-                new_sale = Sale.objects.create(**sale_attributes)
-                new_sale.save()
-                # Create the sale details
-                products = data["products"]
+                with transaction.atomic():
+                    # Create the sale
+                    new_sale = Sale.objects.create(**sale_attributes)
+                    new_sale.save()
+                    # Create the sale details
+                    products = data["products"]
 
-                for product in products:
-                    detail_attributes = {
-                        "sale": Sale.objects.get(id=new_sale.id),
-                        "product": Product.objects.get(id=int(product["id"])),
-                        "price": product["price"],
-                        "quantity": product["quantity"],
-                        "total_detail": product["total_product"]
-                    }
-                    sale_detail_new = SaleDetail.objects.create(
-                        **detail_attributes)
-                    sale_detail_new.save()
+                    for product in products:
+                        detail_attributes = {
+                            "sale": Sale.objects.get(id=new_sale.id),
+                            "product": Product.objects.get(id=int(product["id"])),
+                            "price": product["price"],
+                            "quantity": product["quantity"],
+                            "total_detail": product["total_product"]
+                        }
+                        sale_detail_new = SaleDetail.objects.create(
+                            **detail_attributes)
 
-                print("Sale saved")
+                        # Subtract sold quantity from product stock
+                        product_instance = detail_attributes["product"]
+                        product_instance.stock -= detail_attributes["quantity"]
+                        product_instance.save()
 
-                messages.success(
-                    request, 'Sale created succesfully!', extra_tags="success")
+                        # sale_detail_new.save()
+
+                    print("Sale saved")
+
+                    messages.success(
+                        request, 'Sale created succesfully!', extra_tags="success")
 
             except Exception as e:
                 messages.success(

@@ -1,7 +1,7 @@
 {% extends "pos/base.html" %}
 {% load static %}
 <!-- Page title  -->
-{% block title %}Sales{% endblock title %}
+{% block title %}Salidas{% endblock title %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
@@ -11,7 +11,7 @@
 {% endblock stylesheets %}
 
 <!-- Page Heading -->
-{% block heading %}Sales{% endblock heading %}
+{% block heading %}Salidas{% endblock heading %}
 
 <!-- Page content  -->
 {% block content %}
@@ -21,7 +21,7 @@
         <a href="{% url 'sales:sales_add' %}">
             <button type="button" class="btn btn-success font-weight-bold">
                     <i class="fas fa-plus mr-2"></i>
-                    Create new sale
+                    Crear nueva salida
             </button>
         </a>
     </div>
@@ -29,7 +29,7 @@
     <!-- DataTable -->
     <div class="card shadow mb-12">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Customers</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Clientes</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -38,11 +38,11 @@
                         <tr>
                             <th style="width:5%">#</th>
                             <th style="width:15%">ID</th>
-                            <th style="width:25%">Date</th>
-                            <th style="width:20%">Customer</th>
+                            <th style="width:25%">Fecha</th>
+                            <th style="width:20%">Cliente</th>
                             <th class="text-center" style="width:10%">Total</th>
                             <th class="text-center" style="width:5%">Items</th>
-                            <th class="text-center" style="width:10%">Actions</th>
+                            <th class="text-center" style="width:10%">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,7 +103,7 @@
             buttons: [
                 {
                 extend: 'print',
-                text: 'Print <i class="fas fa-file ml-2"></i>',
+                text: 'Imprimir <i class="fas fa-file ml-2"></i>',
                 titleAttr: 'Print',
                 className: 'btn btn-info',
                 exportOptions: {
@@ -112,7 +112,7 @@
                 },
                 {
                     extend: 'excelHtml5',
-                    text: 'Download Excel <i class="fas fa-file-excel ml-2"></i>',
+                    text: 'Imprimir Excel <i class="fas fa-file-excel ml-2"></i>',
                     titleAttr: 'Download Excel',
                     className: 'btn btn-success ml-2',
                     exportOptions: {
@@ -121,7 +121,7 @@
                 },
                 {
                     extend: 'pdfHtml5',
-                    text: 'Download PDF <i class="fas fa-file-pdf ml-2"></i>',
+                    text: 'Imprimir PDF <i class="fas fa-file-pdf ml-2"></i>',
                     titleAttr: 'Download PDF',
                     className: 'btn btn-danger ml-2',
                     download: 'open',
