@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -42,6 +43,12 @@ class Product(models.Model):
         Category, related_name="category", on_delete=models.CASCADE, db_column='category')
 
     price = models.FloatField(default=0)
+    
+    deposit = models.CharField(max_length=256, default=2024)
+    isbn = models.CharField(max_length=256, default=545454)
+    pages = models.CharField(max_length=256, default=150)
+    published = models.DateField(default=timezone.now())
+    stock = models.CharField(max_length=256, default=5)
 
     class Meta:
         # Table's name
