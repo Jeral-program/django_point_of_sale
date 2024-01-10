@@ -1,7 +1,7 @@
 {% extends "pos/base.html" %}
 {% load static %}
 <!-- Page title  -->
-{% block title %}Sale details{% endblock title %}
+{% block title %}Detalles de salida{% endblock title %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
@@ -15,7 +15,7 @@
 {% endblock stylesheets %}
 
 <!-- Page Heading -->
-{% block heading %}Sale ID: {{sale.id}}, details{% endblock heading %}
+{% block heading %}Salida ID: {{sale.id}}, detalles{% endblock heading %}
 
 <!-- Page content  -->
 {% block content %}
@@ -24,7 +24,7 @@
     <a href="{% url 'sales:sales_list' %}">
         <button type="button" class="btn btn-info font-weight-bold">
             <i class="fas fa-long-arrow-alt-left mr-2"></i>
-            Go back
+            Volver
         </button>
     </a>
 </div>
@@ -38,7 +38,7 @@
                     <!--Left column-->
                     <div class="col-md-9 pl-0">
                         <div class="card card-secondary">
-                            <div class="card-header">Sale products</div>
+                            <div class="card-header">Productos en salida</div>
                             
                             <div class="card-body">
                                 <!--Products table-->
@@ -47,9 +47,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
+                                                <th>Titulo</th>
+                                                <th>Precio</th>
+                                                <th>Cantidad</th>
                                                 <th>Total</th>
                                                 </tr>
                                             </thead>
@@ -75,11 +75,11 @@
                     <!--Righ column-->
                     <div class="col-md-3 pr-0">
                         <div class="card card-secondary">
-                            <div class="card-header">Sale details</div>
+                            <div class="card-header">Detalles de salida</div>
                             <div class="card-body">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <label for="customer">Customer</label>
+                                    <label for="customer">Cliente</label>
                                     <select name="customer" class="form-control" id="searchbox_customers" disabled readonly>
                                         <option value="{{sale.customer.id}}">{{sale.customer.get_full_name}}</option>
                                     </select>
@@ -90,25 +90,25 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Tax Inclusive (%)</label>
+                                    <label>Impuesto incluido (%)</label>
                                     <div class="input-group">
                                         <input name="tax_percentage" class="form-control" value="{{sale.tax_percentage}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Tax Amount</label>
+                                    <label>Monto del Impuesto</label>
                                     <div class="input-group">
                                         <input name="tax_amount" class="form-control" value="{{sale.tax_amount}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Grand Total</label>
+                                    <label>Monto Total</label>
                                     <div class="input-group">
                                         <input name="grand_total" class="form-control" value="{{sale.grand_total}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Amount payed</label>
+                                    <label>Monto pagado</label>
                                     <div class="input-group">
                                         <input name="amount_payed" class="form-control" value="{{sale.amount_payed}}" readonly>
                                     </div>
