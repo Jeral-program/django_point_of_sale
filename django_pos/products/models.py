@@ -44,11 +44,11 @@ class Product(models.Model):
 
     price = models.FloatField(default=0)
     
-    deposit = models.CharField(max_length=256, default=2024)
-    isbn = models.CharField(max_length=256, default=545454)
-    pages = models.CharField(max_length=256, default=150)
-    published = models.DateField(default=timezone.now())
-    stock = models.CharField(max_length=256, default=5)
+    deposit = models.CharField(max_length=256)
+    isbn = models.CharField(max_length=256)
+    pages = models.CharField(max_length=256)
+    published = models.DateField(null=True, blank=True)
+    stock = models.IntegerField(default=1)
 
     class Meta:
         # Table's name
@@ -64,4 +64,10 @@ class Product(models.Model):
         item['category'] = self.category.name
         item['quantity'] = 1
         item['total_product'] = 0
+        item['stock'] = self.stock
+        item['price'] = self.price
+        item['deposit'] = self.deposit
+        item['isbn'] = self.isbn
+        item['pages'] = self.pages
+        item['published'] = self.published
         return item

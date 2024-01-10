@@ -223,17 +223,22 @@ def ProductsUpdateView(request, product_id):
                 "status": data['state'],
                 "description": data['description'],
                 "category": Category.objects.get(id=data['category']),
-                "price": data['price']
+                "price": data['price'],
+                "deposit": data['deposit'],
+                "isbn": data['isbn'],
+                "pages": data['pages'],
+                "published": data['published'],
+                "stock": data['stock']
             }
 
             # Check if a product with the same attributes exists
-            if product.objects.filter(**attributes).exists():
+            if Product.objects.filter(**attributes).exclude(id=product_id).exists():
                 messages.error(request, 'Product already exists!',
                                extra_tags="warning")
                 return redirect('products:products_add')
 
             # Get the product to update
-            product = Product.objects.filter(
+            Product.objects.filter(
                 id=product_id).update(**attributes)
 
             product = Product.objects.get(id=product_id)
