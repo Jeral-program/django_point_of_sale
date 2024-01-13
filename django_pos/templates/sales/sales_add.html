@@ -504,7 +504,7 @@
             ;
 
             // Only allow to send if the payed amount is equal or greater than the total
-            if ($('[name="amount_payed"]').val() <= $('[name="grand_total"]').val()) {
+            if ($('[name="amount_payed"]').val() < $('[name="grand_total"]').val()) {
                 Swal.fire({
                     title: 'El monton pagado debe ser mayor o igual al monto total',
                     icon: 'warning',
