@@ -161,7 +161,10 @@ def ProductsAddView(request):
             "description": data['description'],
             "category": Category.objects.get(id=data['category']),
             "price": data['price'],
-            "deposit": data['deposit']
+            "deposit": data['deposit'],
+            "isbn": data['isbn'],
+            "pages": data['pages'],
+            "published": data['published'],
         }
 
         # Check if a product with the same attributes exists

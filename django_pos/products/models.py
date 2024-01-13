@@ -47,7 +47,7 @@ class Product(models.Model):
     deposit = models.CharField(max_length=256)
     isbn = models.CharField(max_length=256)
     pages = models.CharField(max_length=256)
-    published = models.DateField(null=True, blank=True)
+    published = models.CharField(max_length=256)
     stock = models.IntegerField(default=1)
 
     class Meta:
